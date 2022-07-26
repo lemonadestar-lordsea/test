@@ -27,7 +27,7 @@ runs:
   using: 'composite'
   steps:
     - id: cmp
-      run: repo-cmp.sh
+      run: echo 'cmp test'
       shell: bash
     - name: Dump GitHub context
       id: github_context_step

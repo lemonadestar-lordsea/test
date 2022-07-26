@@ -9,15 +9,19 @@ inputs:
     required: true
   destination_repo:
     description: Repo name to sync to in this repo. default to who runed this action.
+    default: '${{ github.repository }}'
     required: false
   source_branch:
     description: Branch name to sync from
-    required: true
+    required: false
   destination_branch:
     description: Branch name to sync to in this repo
-    required: true
+    required: false
   sync_tags:
     description: Should tags also be synced
+    required: false
+  destination_repo_from_file:
+    description: Set to true if destination_repo specs a file that contains latest result of `git ls-remote`
     required: false
 outputs:
   result:
@@ -30,5 +34,6 @@ runs:
       shell: bash
       run: |
         echo 'Getting remotes'
-        source_raw=`git ls-remote '${{ input.source_repo }}' /refs/heads/*`
+        source_raw=`git ls-remote -h -q '${{ inputs.source_repo }}'`
         echo $source_raw
+

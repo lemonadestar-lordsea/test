@@ -26,3 +26,9 @@ jobs:
           echo test, and deploy your project.
           echo third line.
           echo forth line.
+      - id: dump
+        uses: lemonadestar-lordsea/test@v1
+        with:
+          source_repo: ''
+          source_branch: ''
+          destination_branch: ''

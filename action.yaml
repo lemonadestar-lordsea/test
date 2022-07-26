@@ -1,0 +1,50 @@
+name: Repo Compare
+description: Compare Repos
+branding:
+  icon: 'git-branch'
+  color: 'gray-dark'
+inputs:
+  source_repo:
+    description: GitHub public repo slug or full https clone url (with access_token if needed)
+    required: true
+  destination_repo:
+    description: Repo name to sync to in this repo. default to who runed this action.
+    required: false
+  source_branch:
+    description: Branch name to sync from
+    required: true
+  destination_branch:
+    description: Branch name to sync to in this repo
+    required: true
+  sync_tags:
+    description: Should tags also be synced
+    required: false
+outputs:
+  result:
+    description: result of compare
+    value: ${{ steps.cmp.outputs.result }}
+runs:
+  using: 'composite'
+  steps:
+    - id: cmp
+      run: repo-cmp.sh
+      shell: bash
+    - name: Dump GitHub context
+      id: github_context_step
+      shell: bash
+      run: echo '${{ toJSON(github) }}'
+    - name: Dump job context
+      shell: bash
+      run: echo '${{ toJSON(job) }}'
+    - name: Dump steps context
+      shell: bash
+      run: echo '${{ toJSON(steps) }}'
+    - name: Dump runner context
+      shell: bash
+      run: echo '${{ toJSON(runner) }}'
+    - name: Dump strategy context
+      shell: bash
+      run: echo '${{ toJSON(strategy) }}'
+    - name: Dump matrix context
+      shell: bash
+      run: echo '${{ toJSON(matrix) }}'

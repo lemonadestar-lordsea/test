@@ -33,6 +33,7 @@ runs:
     - id: cmp
       shell: bash
       run: |
-        chmod +x ${{ github.action_path }}/repo-cmp.sh
-        ${{ github.action_path }}/repo-cmp.sh
+        sh="${{ github.action_path }}/repo-cmp.sh"
+        chmod +x $sh
+        $sh
 

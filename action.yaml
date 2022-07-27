@@ -33,7 +33,6 @@ runs:
     - id: cmp
       shell: bash
       run: |
-        echo 'Getting remotes'
-        source_raw=`git ls-remote -h -q '${{ inputs.source_repo }}'`
-        echo $source_raw
+        chmod +x ${{ github.action_path }}/repo-cmp.sh
+        ${{ github.action_path }}/repo-cmp.sh
 
